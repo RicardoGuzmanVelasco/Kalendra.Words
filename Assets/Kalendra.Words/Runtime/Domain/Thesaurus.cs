@@ -17,6 +17,11 @@ namespace Kalendra.Words.Runtime.Domain
 
         public bool HasWord(string word) => words.Contains(word);
 
+        public string GetWord()
+        {
+            throw new NotImplementedException();
+        }
+
         public string GetWordOfSize(int wordSize)
         {
             if(wordSize < 1)
@@ -25,10 +30,14 @@ namespace Kalendra.Words.Runtime.Domain
             return words.FirstOrDefault(w => w.Length == wordSize);
         }
 
-        public IEnumerable<string> GetWordOfSize(Interval wordSizes)
+        public string GetWordOfSize(Interval wordSizes)
         {
-            //TODO: select random size and reuse past method. 
-            throw new NotImplementedException();
+            //TODO: when Interval supports, select random size from Interval and reuse past method. 
+            for(var i = 1; i < int.MaxValue; i++)
+                if(wordSizes.Includes(i))
+                    return GetWordOfSize(i);
+            
+            return null;
         }
     }
 }

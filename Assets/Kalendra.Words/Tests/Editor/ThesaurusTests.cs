@@ -111,6 +111,12 @@ namespace Kalendra.Words.Tests.Editor
 
             result.Should().BeNull();
         }
+
+        [Test, Ignore("TODO: random shuffle needed")]
+        public void AnyThesaurus_AskedForAnyWord_DoesNotReturnAlwaysWordsOfTheSameSize()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }
