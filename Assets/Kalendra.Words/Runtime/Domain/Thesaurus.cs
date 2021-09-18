@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Kalendra.Maths;
 
 namespace Kalendra.Words.Runtime.Domain
 {
-    public class Thesaurus
+    public class Thesaurus : IThesaurus
     {
         readonly List<string> words;
 
@@ -13,9 +15,19 @@ namespace Kalendra.Words.Runtime.Domain
         public Thesaurus(List<string> words) => this.words = words;
         #endregion
 
-        public bool Has(string word)
+        public bool HasWord(string word) => words.Contains(word);
+
+        public string GetWordOfSize(int wordSize)
         {
-            return words.Contains(word);
+            if(wordSize < 1)
+                throw new ArgumentOutOfRangeException();
+            
+            return words.FirstOrDefault(w => w.Length == wordSize);
+        }
+
+        public IEnumerable<string> GetWordsBetweenSizes(int requestedWordsCount, Interval wordsInclusiveSizes)
+        {
+            return null;
         }
     }
 }

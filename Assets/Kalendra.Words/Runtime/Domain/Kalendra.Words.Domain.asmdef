@@ -1,7 +1,9 @@
 {
     "name": "Kalendra.Words.Domain",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "Kalendra.Maths"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

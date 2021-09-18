@@ -5,6 +5,7 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "BoundfoxStudios.FluentAssertions",
+        "Kalendra.Maths",
         "Kalendra.Words.Domain",
         "Kalendra.Words.Tests.Builders"
     ],

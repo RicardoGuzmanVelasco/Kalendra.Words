@@ -8,7 +8,6 @@ namespace Kalendra.Words.Tests.Builders
     public class ThesaurusBuilder
     {
         string[] words = Array.Empty<string>();
-        
         #region Fluent API
         public ThesaurusBuilder WithWords(params string[] words)
         {

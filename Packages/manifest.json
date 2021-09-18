@@ -2,6 +2,7 @@
   "dependencies": {
 	"com.boundfoxstudios.fluentassertions": "https://github.com/BoundfoxStudios/fluentassertions-unity.git#upm",
     "com.kalendra.commons": "https://github.com/RicardoGuzmanVelasco/Kalendra.Commons.git?path=/Assets/Kalendra.Commons",
+    "com.kalendra.maths": "https://github.com/RicardoGuzmanVelasco/Kalendra.Commons.git?path=/Assets/Kalendra.Maths",
     "com.unity.2d.animation": "5.0.6",
     "com.unity.2d.pixel-perfect": "4.0.1",
     "com.unity.2d.psdimporter": "4.1.0",
