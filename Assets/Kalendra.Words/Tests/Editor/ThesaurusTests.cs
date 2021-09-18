@@ -16,6 +16,7 @@ namespace Kalendra.Words.Tests.Editor
         static string AnyOtherWord => "anything";
 
         static int AnyPositiveNumber => new System.Random().Next(1, int.MaxValue);
+        static Interval AnyPositiveInterval => Interval.From(1, AnyPositiveNumber);
         #endregion
         
         #region Has a word
@@ -95,7 +96,7 @@ namespace Kalendra.Words.Tests.Editor
             result.Should().Be(SomeWord);
         }
 
-        [Test, Ignore("TODO")]
+        [Test, Ignore("TODO: random shuffle needed")]
         public void PopulatedThesaurus_AskedForWord_DoesNotAlwaysReturnsTheSameWord()
         {
             throw new NotImplementedException();
@@ -104,13 +105,67 @@ namespace Kalendra.Words.Tests.Editor
         
         #region Get some words
         [Test]
-        public void EmptyThesaurus_AskedForSomeWords_ReturnsNull()
+        public void EmptyThesaurus_AskedForSomeWords_ReturnsEmpty()
         {
             Thesaurus sut = Build.Thesaurus();
 
-            IEnumerable<string> result = sut.GetWordsBetweenSizes(1, Interval.From(1, 2));
+            var result = sut.GetWordsBetweenSizes(AnyPositiveNumber, AnyPositiveInterval);
 
-            result.Should().BeNull();
+            result.Should().BeEmpty();
+        }
+        
+        [Test, Ignore("TODO: Interval lacks support for negative/positive sense or < > operators")]
+        public void AnyThesaurus_AskedSomeForNonPositiveSizedWords_ThrowsException()
+        {
+            Thesaurus sut = Build.Thesaurus();
+
+            Action act = () => sut.GetWordsBetweenSizes(AnyPositiveNumber, (-1, 0));
+
+            act.Should().ThrowExactly<ArgumentOutOfRangeException>();
+        }
+        
+        [TestCase(-1), TestCase(0)]
+        public void AnyThesaurus_AskedSomeForNonPositiveAmountOfWords_ThrowsException(int howmanyWords)
+        {
+            Thesaurus sut = Build.Thesaurus();
+
+            Action act = () => sut.GetWordsBetweenSizes(howmanyWords, AnyPositiveInterval);
+
+            act.Should().ThrowExactly<ArgumentOutOfRangeException>();
+        }
+        
+        [Test]
+        public void AnyThesaurus_AskedForNotContainedSizes_ReturnsNull()
+        {
+            Thesaurus sut = Build.Thesaurus().WithWords(SomeWord);
+
+            var result = sut.GetWordsBetweenSizes(1, (2, int.MaxValue));
+
+            result.Should().BeEmpty();
+        }
+
+        [Test]
+        public void AnyThesaurus_AskedForSomeWords_DoesNotRepeatAnyWord()
+        {
+            Thesaurus sut = Build.Thesaurus().WithWords("wordOfSameSize1", "wordOfSameSize2");
+
+            var result = sut.GetWordsOfSize(2, "wordOfSameSize1".Length);
+
+            result.Should().HaveCount(2);
+            result.Should().Contain("wordOfSameSize1");
+            result.Should().Contain("wordOfSameSize2");
+        }
+        
+        [Test, Ignore("TODO: random shuffle needed")]
+        public void AnyThesaurus_AskedForSomeDiverseWordSizes_ReturnWordsOfTheseSizes()
+        {
+            Thesaurus sut = Build.Thesaurus().WithWords("long", "longer", "longest");
+
+            var requestedSizesInterval = ("long".Length, "longest".Length);
+            var result = sut.GetWordsBetweenSizes(1, requestedSizesInterval);
+
+            var expectedResults = new[] { "long", "longer", "longest" };
+            result.Should().Contain(expectedResults);
         }
         #endregion
     }
