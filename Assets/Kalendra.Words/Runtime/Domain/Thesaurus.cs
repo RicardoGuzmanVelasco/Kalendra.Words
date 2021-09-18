@@ -22,22 +22,13 @@ namespace Kalendra.Words.Runtime.Domain
             if(wordSize < 1)
                 throw new ArgumentOutOfRangeException();
             
-            return words.FirstOrDefault(w => w.Length == wordSize); //TODO: reuse GetWordsBetweenSizes.
+            return words.FirstOrDefault(w => w.Length == wordSize);
         }
 
-        public IEnumerable<string> GetWordsBetweenSizes(int requestedWordsCount, Interval wordsSizes)
+        public IEnumerable<string> GetWordOfSize(Interval wordSizes)
         {
-            if(requestedWordsCount < 1)
-                throw new ArgumentOutOfRangeException();
-            
-            var wordsToReturn = new List<string>();
-            
-            return wordsToReturn;
-        }
-        
-        public IEnumerable<string> GetWordsOfSize(int requestedWordsCount, int wordsSize)
-        {
-            return GetWordsBetweenSizes(requestedWordsCount, (wordsSize, wordsSize));
+            //TODO: select random size and reuse past method. 
+            throw new NotImplementedException();
         }
     }
 }
