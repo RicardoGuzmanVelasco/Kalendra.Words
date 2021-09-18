@@ -1,6 +1,6 @@
 {
     "name": "Kalendra.Words.Tests.Builders",
-    "rootNamespace": "Kalendra.Words.Tests.Builders",
+    "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",

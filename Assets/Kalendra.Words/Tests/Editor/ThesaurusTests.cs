@@ -1,50 +1,49 @@
-using System;
 using FluentAssertions;
-using Kalendra.Words.Domain.Kalendra.Words.Runtime.Domain;
+using Kalendra.Words.Runtime.Domain;
+using Kalendra.Words.Tests.Builders;
 using NUnit.Framework;
 
 namespace Kalendra.Words.Tests.Editor
 {
     public class ThesaurusTests
     {
+        #region Fixture
+        static string SomeWord => "something";
+        static string AnyOtherWord => "anything";
+        #endregion
+        
         [Test]
         public void EmptyThesaurus_HasNot_AnyWord()
         {
-            var sut = new Thesaurus();
+            Thesaurus sut = Build.Thesaurus();
 
-            var result = sut.Has("anyWord");
-
-            result.Should().BeFalse();
+            sut.Has(SomeWord).Should().BeFalse();
         }
 
         [Test]
         public void ThesaurusWithWord_Has_ThatWord()
         {
-            var sut = new Thesaurus(new[] { "containedWord" });
+            Thesaurus sut = Build.Thesaurus().WithWords(SomeWord);
 
-            var result = sut.Has("containedWord");
-
-            result.Should().BeTrue();
+            sut.Has(SomeWord).Should().BeTrue();
         }
 
         [Test]
         public void ThesaurusWithSomeWord_HasNot_AnyOtherWord()
         {
-            var sut = new Thesaurus(new[] { "containedWord" });
+            Thesaurus sut = Build.Thesaurus().WithWords(SomeWord);
 
-            var result = sut.Has("anyotherWord");
-
-            result.Should().BeFalse();
+            sut.Has(AnyOtherWord).Should().BeFalse();
         }
 
         [Test]
         public void ThesaurusWithSomeWords_Has_AllTheseWords()
         {
-            var sut = new Thesaurus(new[] { "containedWord1", "containedWord2" });
+            Thesaurus sut = Build.Thesaurus().WithWords("word1", "word2");
 
-            sut.Has("containedWord1").Should().BeTrue();
-            sut.Has("containedWord2").Should().BeTrue();
-            sut.Has("anyotherWord").Should().BeFalse();
+            sut.Has("word1").Should().BeTrue();
+            sut.Has("word2").Should().BeTrue();
+            sut.Has(AnyOtherWord).Should().BeFalse();
         }
     }
 }

@@ -1,11 +1,12 @@
 {
     "name": "Kalendra.Words.Tests.Editor",
-    "rootNamespace": "Kalendra.Words.Tests.Editor",
+    "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "BoundfoxStudios.FluentAssertions",
-        "Kalendra.Words.Domain"
+        "Kalendra.Words.Domain",
+        "Kalendra.Words.Tests.Builders"
     ],
     "includePlatforms": [
         "Editor"

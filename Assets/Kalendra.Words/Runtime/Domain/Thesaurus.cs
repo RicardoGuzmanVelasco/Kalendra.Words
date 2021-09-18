@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Kalendra.Words.Domain.Kalendra.Words.Runtime.Domain
+namespace Kalendra.Words.Runtime.Domain
 {
     public class Thesaurus
     {

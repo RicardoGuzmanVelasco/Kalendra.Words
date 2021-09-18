@@ -1,6 +1,6 @@
 {
     "name": "Kalendra.Words.Infrastructure",
-    "rootNamespace": "Kalendra.Words.Infrastructure",
+    "rootNamespace": "",
     "references": [
         "GUID:1f1e94121dc6f144491c85dfc56aa5f2"
     ],
