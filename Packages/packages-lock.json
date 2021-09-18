@@ -1,5 +1,19 @@
 {
   "dependencies": {
+    "com.boundfoxstudios.fluentassertions": {
+      "version": "https://github.com/BoundfoxStudios/fluentassertions-unity.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "58a427c7778422e92bb58604f74562646e3d702c"
+    },
+    "com.kalendra.commons": {
+      "version": "https://github.com/RicardoGuzmanVelasco/Kalendra.Commons.git?path=/Assets/Kalendra.Commons",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "c7672182baa738b80450c4d46dd87d73632878e9"
+    },
     "com.unity.2d.animation": {
       "version": "5.0.6",
       "depth": 0,

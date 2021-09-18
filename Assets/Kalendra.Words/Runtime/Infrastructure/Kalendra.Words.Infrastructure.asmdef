@@ -1,0 +1,16 @@
+{
+    "name": "Kalendra.Words.Infrastructure",
+    "rootNamespace": "Kalendra.Words.Infrastructure",
+    "references": [
+        "GUID:1f1e94121dc6f144491c85dfc56aa5f2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
