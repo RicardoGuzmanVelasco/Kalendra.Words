@@ -14,9 +14,6 @@ namespace Kalendra.Words.Tests.Editor
         #region Fixture
         static string SomeWord => "some word";
         static string AnyOtherWord => "anything";
-
-        static int AnyPositiveNumber => new System.Random().Next(1, int.MaxValue);
-        static Interval AnyPositiveInterval => Interval.From(1, AnyPositiveNumber);
         #endregion
         
         #region Has a word
@@ -57,11 +54,11 @@ namespace Kalendra.Words.Tests.Editor
 
         #region Get a word
         [Test]
-        public void EmptyThesaurus_AskedForAnySizedWord_ReturnsNull()
+        public void EmptyThesaurus_AskedForAnyWord_ReturnsNull()
         {
             Thesaurus sut = Build.Thesaurus();
 
-            var result = sut.GetWordOfSize(AnyPositiveNumber);
+            var result = sut.GetWord();
 
             result.Should().BeNull();
         }
@@ -86,6 +83,16 @@ namespace Kalendra.Words.Tests.Editor
             result.Should().BeNull();
         }
 
+        [Test]
+        public void OneWordThesaurus_AskedForAnyWord_ReturnsThatWord()
+        {
+            Thesaurus sut = Build.Thesaurus().WithWords(SomeWord);
+
+            var result = sut.GetWord();
+
+            result.Should().Be(SomeWord);
+        }
+        
         [Test]
         public void OneWordThesaurus_AskedForThatWordSize_ReturnsThatWord()
         {

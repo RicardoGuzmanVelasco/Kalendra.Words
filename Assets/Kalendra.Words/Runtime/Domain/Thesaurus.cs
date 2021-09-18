@@ -19,15 +19,7 @@ namespace Kalendra.Words.Runtime.Domain
 
         public string GetWord()
         {
-            throw new NotImplementedException();
-        }
-
-        public string GetWordOfSize(int wordSize)
-        {
-            if(wordSize < 1)
-                throw new ArgumentOutOfRangeException();
-            
-            return words.FirstOrDefault(w => w.Length == wordSize);
+            return GetWordOfSize(Interval.From(1, int.MaxValue));
         }
 
         public string GetWordOfSize(Interval wordSizes)
@@ -38,6 +30,14 @@ namespace Kalendra.Words.Runtime.Domain
                     return GetWordOfSize(i);
             
             return null;
+        }
+        
+        public string GetWordOfSize(int wordSize)
+        {
+            if(wordSize < 1)
+                throw new ArgumentOutOfRangeException();
+            
+            return words.FirstOrDefault(w => w.Length == wordSize);
         }
     }
 }
