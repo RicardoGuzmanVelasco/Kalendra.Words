@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Kalendra.Maths;
 using Kalendra.Words.Runtime.Domain;
 using Kalendra.Words.Tests.Builders;
-using NSubstitute;
 using NUnit.Framework;
 
 namespace Kalendra.Words.Tests.Editor
@@ -14,6 +14,8 @@ namespace Kalendra.Words.Tests.Editor
         #region Fixture
         static string SomeWord => "some word";
         static string AnyOtherWord => "anything";
+
+        static IEnumerable<T2> Repeat<T2>(Func<T2> over, int times) => Interval.From(1, times).IterateOver().Select(_ => over.Invoke());
         #endregion
         
         #region Has a word
@@ -103,10 +105,15 @@ namespace Kalendra.Words.Tests.Editor
             result.Should().Be(SomeWord);
         }
 
-        [Test, Ignore("TODO: random shuffle needed")]
+        [Test, Retry(10)]
         public void PopulatedThesaurus_AskedForWord_DoesNotAlwaysReturnsTheSameWord()
         {
-            throw new NotImplementedException();
+            Thesaurus sut = Build.Thesaurus().WithVarietyOfWords();
+
+            string Act() => sut.GetWord();
+
+            var resultDifferentWords = Repeat(Act, 50).Distinct();
+            resultDifferentWords.Should().HaveCountGreaterThan(1);
         }
 
        [Test]
@@ -114,15 +121,20 @@ namespace Kalendra.Words.Tests.Editor
         {
             Thesaurus sut = Build.Thesaurus().WithWords(SomeWord);
 
-            var result = sut.GetWordOfSize((2, int.MaxValue));
+            var result = sut.GetWordOfSize(Interval.From(SomeWord.Length + 1));
 
             result.Should().BeNull();
         }
 
-        [Test, Ignore("TODO: random shuffle needed")]
-        public void AnyThesaurus_AskedForAnyWord_DoesNotReturnAlwaysWordsOfTheSameSize()
+        [Test, Retry(10)]
+        public void PopulatedThesaurus_AskedForAnyWord_DoesNotReturnAlwaysWordsOfTheSameSize()
         {
-            throw new NotImplementedException();
+            Thesaurus sut = Build.Thesaurus().WithVarietyOfWords();
+
+            string Act() => sut.GetWord();
+
+            var resultDifferentLengths = Repeat(Act, 50).Where(s =>s != null).Distinct();
+            resultDifferentLengths.Should().HaveCountGreaterThan(1);
         }
         #endregion
     }

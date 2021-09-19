@@ -5,7 +5,8 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "BoundfoxStudios.FluentAssertions",
-        "Kalendra.Words.Domain"
+        "Kalendra.Words.Domain",
+        "Kalendra.Commons.Domain"
     ],
     "includePlatforms": [
         "Editor"

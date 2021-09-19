@@ -14,6 +14,17 @@ namespace Kalendra.Words.Tests.Builders
             this.words = words;
             return this;
         }
+
+        public ThesaurusBuilder WithVarietyOfWords()
+        {
+            words = new[]
+            {
+                "a", "rich", "thesaurus",
+                "with", "plenty", "of",
+                "different", "sized", "words"
+            };
+            return this;
+        }
         #endregion
 
         #region ObjectMother/FactoryMethods

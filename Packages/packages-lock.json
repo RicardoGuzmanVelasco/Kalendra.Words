@@ -12,14 +12,14 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "eddb38d0da47e8bca3cdf9e5bce47362e41c6625"
+      "hash": "dcf4ce83702145a355893cbe562506c4a7b48df5"
     },
     "com.kalendra.maths": {
       "version": "https://github.com/RicardoGuzmanVelasco/Kalendra.Commons.git?path=/Assets/Kalendra.Maths",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "d95caa6e72fd60662aadab6ccffa791ed2b018f1"
+      "hash": "d6e6ef9ff70c163539ea4e7f64fc282217ed062f"
     },
     "com.unity.2d.animation": {
       "version": "5.0.6",

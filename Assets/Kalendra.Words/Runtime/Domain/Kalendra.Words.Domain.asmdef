@@ -2,7 +2,9 @@
     "name": "Kalendra.Words.Domain",
     "rootNamespace": "",
     "references": [
-        "Kalendra.Maths"
+        "Kalendra.Maths",
+        "Kalendra.Commons.Domain",
+        "Kalendra.Commons.Infrastructure"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
