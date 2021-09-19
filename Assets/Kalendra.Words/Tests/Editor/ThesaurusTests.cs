@@ -28,6 +28,16 @@ namespace Kalendra.Words.Tests.Editor
         }
 
         [Test]
+        public void AnyThesaurus_AskedIfHasNullWord_ThrowsException()
+        {
+            Thesaurus sut = Build.Thesaurus();
+
+            Action act = () => sut.HasWord(null!);
+
+            act.Should().ThrowExactly<NullReferenceException>();
+        }
+
+        [Test]
         public void ThesaurusWithWord_Has_ThatWord()
         {
             Thesaurus sut = Build.Thesaurus().WithWords(SomeWord);

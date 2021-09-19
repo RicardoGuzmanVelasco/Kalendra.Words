@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using Kalendra.Commons.Runtime.Domain.Services;
 using Kalendra.Maths;
 
@@ -35,7 +36,7 @@ namespace Kalendra.Words.Runtime.Domain
         }
         #endregion
 
-        public bool HasWord(string word) => words.ContainsKey(word.Length) && words[word.Length].Contains(word);
+        public bool HasWord([NotNull] string word) => words.ContainsKey(word.Length) && words[word.Length].Contains(word);
 
         public string GetWord() => words.Any() ? GetWordOfSize(random.GetRandom(words.Keys)) : null;
 
@@ -57,10 +58,5 @@ namespace Kalendra.Words.Runtime.Domain
 
             return !words.ContainsKey(wordSize) ? null : random.GetRandom(words[wordSize]);
         }
-
-        #region Support
-        int MinLenghtOfWords => words.Keys.Min();
-        int MaxLenghtOfWords => words.Keys.Max();
-        #endregion
     }
 }

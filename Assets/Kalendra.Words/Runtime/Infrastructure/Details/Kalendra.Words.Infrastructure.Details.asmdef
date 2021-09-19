@@ -1,10 +1,7 @@
 {
-    "name": "Kalendra.Words.Infrastructure",
+    "name": "Kalendra.Words.Infrastructure.Details",
     "rootNamespace": "",
     "references": [
-        "Kalendra.Commons.Domain",
-        "Kalendra.Words.Domain",
-        "Kalendra.Words.Infrastructure.Details"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
