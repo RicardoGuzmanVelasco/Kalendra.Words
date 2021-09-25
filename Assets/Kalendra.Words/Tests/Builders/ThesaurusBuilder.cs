@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Kalendra.Words.Runtime.Domain;
 
 namespace Kalendra.Words.Tests.Builders
@@ -8,6 +6,7 @@ namespace Kalendra.Words.Tests.Builders
     public class ThesaurusBuilder
     {
         string[] words = Array.Empty<string>();
+
         #region Fluent API
         public ThesaurusBuilder WithWords(params string[] words)
         {
@@ -28,7 +27,9 @@ namespace Kalendra.Words.Tests.Builders
         #endregion
 
         #region ObjectMother/FactoryMethods
-        ThesaurusBuilder() { }
+        ThesaurusBuilder()
+        {
+        }
 
         public static ThesaurusBuilder New() => new ThesaurusBuilder();
         #endregion

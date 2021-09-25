@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface IAlphabet
+
+note as NoteIAlphabet
+Within this domain, an alphabet
+is not as simple as an ABC, but
+a wider concept: is a letters set
+where letters have a numeric value.
+end note
+NoteIAlphabet .. IAlphabet
+
+Abecedary ..|> IAlphabet
+
+note as NoteAbecedary
+Example: ABC is an alphabet
+where value is letter position.
+ABC IAlphabet --> value(a) = 1.
+end note
+NoteAbecedary .. Abecedary
+NoteAbecedary --> NoteIAlphabet
+@enduml

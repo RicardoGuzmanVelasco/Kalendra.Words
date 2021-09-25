@@ -1,0 +1,88 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+allowMixing
+skinparam componentStyle uml1
+
+package Commons.Domain
+{
+    +interface IRandomService{
+    }
+}
+
+package Words.Domain
+{
+    +interface IThesaurus{
+        +HasWord(word: string): bool
+        +GetWord(): string
+        +GetWordOfSize(size: int): string
+        +GetWordOfSize(sizes: Interval): string
+    }
+
+    note as NoteIThesaurus
+    Within this domain, a thesaurus
+    is a set of words you can ask for.
+    end note
+    NoteIThesaurus .u. IThesaurus    
+    
+    Thesaurus ..|> IThesaurus
+    Thesaurus --> IRandomService
+    
+    note as NoteThesaurus
+    Simple Implementation, words lists
+    hashed by word size in a dictionary.
+    end note
+    NoteThesaurus .. Thesaurus
+}
+
+package Words.Infrastructure.Details
+{
+    ~class ByteReader{
+        +ReadCSV(): string[]
+    }
+}
+
+package UnityEngine
+{
+    class Resources <<static>>{
+        {static} +Load<T>(): T[]
+    }
+}
+
+package Words.Infrastructure
+{
+    +class ThesaurusLoader{
+        +Load(language: string): Thesaurus
+    }
+    
+    ThesaurusLoader ..> Thesaurus
+    ThesaurusLoader ..> Resources
+    ThesaurusLoader ..> ByteReader
+    
+    note as NoteThesaurusLoader
+    Too concrete implementation.
+    Loads from a Resources root folder,
+    a .byte file with words split by comma.
+    Trims out any void or whitespace word.
+    end note
+    NoteThesaurusLoader .. ThesaurusLoader
+}
+
+''''''''''''' CLIENT
+
+remove AnyClient
+package AnyClient #gray
+{
+    component AnyClientDomain #lightgray
+    component AnyClientInfrastructure #lightgray
+    component AnyClientEntryPoint #lightgray
+    
+    AnyClientInfrastructure -> AnyClientDomain
+    AnyClientEntryPoint -> AnyClientDomain
+    AnyClientEntryPoint -> AnyClientInfrastructure
+    AnyClientEntryPoint --> Thesaurus
+    
+    AnyClientDomain --> IThesaurus
+    AnyClientInfrastructure --> ThesaurusLoader
+}
+@enduml

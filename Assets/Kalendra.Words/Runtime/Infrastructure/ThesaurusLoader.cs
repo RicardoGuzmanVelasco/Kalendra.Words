@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Kalendra.Words.Runtime.Domain;
+using Kalendra.Words.Runtime.Infrastructure.Details;
 using UnityEngine;
 
 namespace Kalendra.Words.Runtime.Infrastructure
