@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+allowmixing
+skinparam componentStyle uml1
+
++interface IAlphabet<T>
+{
+}
+
+package Aggregate
+{
+    +class GameLexicon <<Root>>
+    {
+    }
+    
+    
+    -class ValuedAlphabet<T> <<Internal>>
+    {
+    }
+    ValuedAlphabet ..|> IAlphabet
+    
+    -class AlphabetPoints <<Internal>>
+    {
+    }
+    -class AlphabetDistribution <<Internal>>
+    {
+    }
+    
+    AlphabetDistribution -r-|> ValuedAlphabet : <float> (dist. weight)
+    AlphabetPoints -l-|> ValuedAlphabet : <int> (point values)
+    
+    -class Thesaurus <<internal>>
+    {
+    }
+    
+    GameLexicon *- Thesaurus
+    GameLexicon *-- AlphabetDistribution
+    GameLexicon *-- AlphabetPoints
+}
+
+component AnyClient #lightgray
+AnyClient ..> GameLexicon
+@enduml
