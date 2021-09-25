@@ -25,4 +25,10 @@ ABC IAlphabet --> value(a) = 1.
 end note
 NoteAbecedary .. Abecedary
 NoteAbecedary --> NoteIAlphabet
+
+class ValuedAlphabet<T>{
+    +AddLetter(letter: char, value: T)
+}
+ValuedAlphabet ...|> IAlphabet
+
 @enduml
