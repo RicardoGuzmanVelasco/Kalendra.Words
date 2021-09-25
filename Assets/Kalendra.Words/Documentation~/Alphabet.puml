@@ -1,17 +1,22 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-interface IAlphabet
++interface IAlphabet<T>
+{
+    HasLetter(letter: char): bool
+    GetValueOf(letter: char): T
+    GetLetter(): char
+}
 
 note as NoteIAlphabet
 Within this domain, an alphabet
 is not as simple as an ABC, but
 a wider concept: is a letters set
-where letters have a numeric value.
+where letters have a value (<T>).
 end note
 NoteIAlphabet .. IAlphabet
 
-Abecedary ..|> IAlphabet
+Abecedary ..|> IAlphabet : <int> (= position)
 
 note as NoteAbecedary
 Example: ABC is an alphabet
