@@ -16,7 +16,7 @@ namespace Kalendra.Words.Runtime.Domain
         public Thesaurus(IEnumerable<string> words, IRandomService random = null) : this(random) => PopulateByWordSize(words);
 
         Thesaurus(IRandomService random) : this() => this.random = random ?? new SystemRandomService();
-        Thesaurus() => words = new Dictionary<int, List<string>>();
+        Thesaurus() => PopulateByWordSize(Array.Empty<string>());
         
         void PopulateByWordSize(IEnumerable<string> wordsToPopulateWith)
         {
@@ -36,7 +36,11 @@ namespace Kalendra.Words.Runtime.Domain
         }
         #endregion
 
-        public bool HasWord([NotNull] string word) => words.ContainsKey(word.Length) && words[word.Length].Contains(word);
+        public bool HasWord([NotNull] string word)
+        {
+            return words.ContainsKey(word.Length) &&
+                   words[word.Length].Contains(word, StringComparer.OrdinalIgnoreCase);
+        }
 
         public string GetWord() => words.Any() ? GetWordOfSize(random.GetRandom(words.Keys)) : null;
 

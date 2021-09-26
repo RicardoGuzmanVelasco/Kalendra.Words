@@ -62,6 +62,14 @@ namespace Kalendra.Words.Tests.Editor
             sut.HasWord("word2").Should().BeTrue();
             sut.HasWord(AnyOtherWord).Should().BeFalse();
         }
+
+        [Test]
+        public void Thesaurus_IsCaseInsensitive()
+        {
+            Thesaurus sut = Build.Thesaurus().WithWords("CASE-sensitive");
+
+            sut.HasWord("case-SENSITIVE").Should().BeTrue();
+        }
         #endregion
 
         #region Get a word

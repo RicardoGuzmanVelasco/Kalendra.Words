@@ -6,7 +6,8 @@
     [ ] If GameLexicon somehow knows about vowels, distributions are internally made.
 [ ] IsVowel() as an alternative extension method?
 
-[ ] Thesaurus getting some random words from size (not all in due to performance).
-[ ] Thesaurus using uniform ToLower() or ToUpper() conversion as invariant when in/out words.
+[x] DISCARDED: Thesaurus getting some random words from size?
+[x] Thesaurus using uniform ToLower() or ToUpper() conversion as invariant when in/out words.
+[-] Thesaurus GetWordOfSize(int) when param overflows max size.
 
 [x] ValuedAlphabet GetRandomLetterByValue().

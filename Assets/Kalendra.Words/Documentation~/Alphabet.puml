@@ -6,6 +6,7 @@
     HasLetter(letter: char): bool
     GetValueOf(letter: char): T
     GetLetter(): char
+    GetLetterOfValue(value: T): char
 }
 
 note as NoteIAlphabet
