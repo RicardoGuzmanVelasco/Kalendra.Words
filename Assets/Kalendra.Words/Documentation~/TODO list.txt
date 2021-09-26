@@ -1,0 +1,12 @@
+[ ] Use hashset where useful to infer invariants.
+    [ ] Example: instead of lists in Thesaurus words entries.
+
+[ ] GameLexicon, besides alphabet distribution, splits vowels and consonants distribution.
+[ ] Alphabet knows what letters are vowels? Or it's implicit by aforesaid splitting?
+    [ ] If GameLexicon somehow knows about vowels, distributions are internally made.
+[ ] IsVowel() as an alternative extension method?
+
+[ ] Thesaurus getting some random words from size (not all in due to performance).
+[ ] Thesaurus using uniform ToLower() or ToUpper() conversion as invariant when in/out words.
+
+[-] ValuedAlphabet GetRandomLetterByValue().
