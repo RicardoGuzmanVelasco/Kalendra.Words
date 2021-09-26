@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Kalendra.Commons.Runtime.Domain.Services;
 
 namespace Kalendra.Words.Runtime.Domain
 {
     public class Abecedary : IAlphabet<int>
     {
         readonly List<string> letters;
+        readonly IRandomService random = new SystemRandomService();
 
         public Abecedary(IEnumerable<string> letters) => this.letters = letters.ToList();
 
@@ -29,6 +31,7 @@ namespace Kalendra.Words.Runtime.Domain
             return letters[position];
         }
 
-        public char GetLetter() => throw new NotImplementedException();
+        public char GetLetter() => random.GetRandom(letters[0]);
+        public char GetLetterOfValue(int value) => letters[value][0];
     }
 }

@@ -9,4 +9,4 @@
 [ ] Thesaurus getting some random words from size (not all in due to performance).
 [ ] Thesaurus using uniform ToLower() or ToUpper() conversion as invariant when in/out words.
 
-[-] ValuedAlphabet GetRandomLetterByValue().
+[x] ValuedAlphabet GetRandomLetterByValue().

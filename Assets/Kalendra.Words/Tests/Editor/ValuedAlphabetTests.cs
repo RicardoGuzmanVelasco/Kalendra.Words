@@ -116,5 +116,60 @@ namespace Kalendra.Words.Tests.Editor
             var resultDifferentLetters = Repeat(Act, 50).Distinct();
             resultDifferentLetters.Should().HaveCountGreaterThan(1);
         }
+
+        [Test]
+        public void EmptyAlphabet_AskedForLetterOfAnyValue_ThrowsException()
+        {
+            ValuedAlphabet<int> sut = Build.Alphabet();
+
+            Action act = () => sut.GetLetterOfValue(0);
+
+            act.Should().ThrowExactly<ArgumentOutOfRangeException>();
+        }
+
+        [Test]
+        public void PopulatedAlphabet_AskedForNotPresentValue_ThrowsException()
+        {
+            ValuedAlphabet<int> sut = Build.Alphabet().WithLetter('a');
+
+            Action act = () => sut.GetLetterOfValue(-1);
+
+            act.Should().ThrowExactly<ArgumentOutOfRangeException>();
+        }
+
+        [Test]
+        public void OneLetterAlphabet_AskedForThatLetterValue_ReturnsThatLetter()
+        {
+            ValuedAlphabet<int> sut = Build.Alphabet().WithLetter('a', 1);
+
+            var result = sut.GetLetterOfValue(sut.GetValueOf('a'));
+            
+            result.Should().Be('a');
+        }
+
+        [Test]
+        public void PopulatedAlphabet_AskedForContainedValue_ReturnsOneLetterWithThatValue()
+        {
+            ValuedAlphabet<int> sut = Build.Alphabet()
+                .WithLetter('a', default)
+                .WithLetter('b', default);
+
+            var result = sut.GetLetterOfValue(sut.GetValueOf('a'));
+            
+            result.Should().BeInRange('a', 'b');
+        }
+
+        [Test, Retry(10)]
+        public void PopulatedAlphabet_AskedForContainedValue_ReturnsRandomly()
+        {
+            ValuedAlphabet<int> sut = Build.Alphabet()
+                .WithLetter('a', 1)
+                .WithLetter('b', 1);
+
+            char Act() => sut.GetLetterOfValue(1);
+
+            var results = Repeat(Act, 50);
+            results.Should().Contain('a').And.Contain('b');
+        }
     }
 }

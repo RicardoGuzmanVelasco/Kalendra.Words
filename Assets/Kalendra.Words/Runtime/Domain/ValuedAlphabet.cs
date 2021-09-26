@@ -41,5 +41,14 @@ namespace Kalendra.Words.Runtime.Domain
 
             return random.GetRandom(valuedLetters.Keys);
         }
+
+        public char GetLetterOfValue(T value)
+        {
+            if(!valuedLetters.ContainsValue(value))
+                throw new ArgumentOutOfRangeException();
+
+            var matchedLetters = valuedLetters.Keys.Where(c => valuedLetters[c].Equals(value));
+            return random.GetRandom(matchedLetters);
+        }
     }
 }
