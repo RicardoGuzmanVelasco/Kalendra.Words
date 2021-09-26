@@ -12,7 +12,18 @@ namespace Kalendra.Words.Tests.Editor
         static char AnyLetter => 'x';
         static char SomeLetter => 'a';
         #endregion
-        
+
+        [Test]
+        public void AnyAbecedary_CannotReceive_RepeatedLetters()
+        {
+            var sut = Build.Abecedary().WithLetters(SomeLetter, SomeLetter);
+
+            Action act = () => sut.Build();
+
+            act.Should().ThrowExactly<ArgumentException>();
+        }
+
+        #region HasLetter
         [Test]
         public void AnyEmptyAbecedary_HasNotAnyLetter()
         {
@@ -43,6 +54,18 @@ namespace Kalendra.Words.Tests.Editor
             result.Should().BeTrue();
         }
 
+        [Test]
+        public void Abecedary_IsCaseInsensitive()
+        {
+            Abecedary sut = Build.Abecedary().WithLetters('a');
+
+            var result = sut.HasLetter('A');
+
+            result.Should().BeTrue();
+        }
+        #endregion
+        
+        #region Letter values
         [Test]
         public void AnyOneLetterAbecedary_ThatLetterValue_Is1()
         {
@@ -94,5 +117,6 @@ namespace Kalendra.Words.Tests.Editor
 
             result.Should().Be('c'.ToString());
         }
+        #endregion
     }
 }

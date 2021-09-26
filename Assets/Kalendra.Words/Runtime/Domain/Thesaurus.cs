@@ -10,7 +10,7 @@ namespace Kalendra.Words.Runtime.Domain
     public class Thesaurus : IThesaurus
     {
         readonly IRandomService random;
-        Dictionary<int, List<string>> words;
+        Dictionary<int, HashSet<string>> words;
 
         #region Constructors
         public Thesaurus(IEnumerable<string> words, IRandomService random = null) : this(random) => PopulateByWordSize(words);
@@ -20,7 +20,7 @@ namespace Kalendra.Words.Runtime.Domain
         
         void PopulateByWordSize(IEnumerable<string> wordsToPopulateWith)
         {
-            words = new Dictionary<int, List<string>>();
+            words = new Dictionary<int, HashSet<string>>();
 
             foreach(var word in wordsToPopulateWith)
                 AddWord(word);
@@ -30,7 +30,7 @@ namespace Kalendra.Words.Runtime.Domain
         {
             var key = word.Length;
             if(!words.ContainsKey(key))
-                words[key] = new List<string>();
+                words[key] = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
             words[key].Add(word);
         }
@@ -39,7 +39,7 @@ namespace Kalendra.Words.Runtime.Domain
         public bool HasWord([NotNull] string word)
         {
             return words.ContainsKey(word.Length) &&
-                   words[word.Length].Contains(word, StringComparer.OrdinalIgnoreCase);
+                   words[word.Length].Contains(word);
         }
 
         public string GetWord() => words.Any() ? GetWordOfSize(random.GetRandom(words.Keys)) : null;

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Kalendra.Commons.Runtime.Domain.Services;
+using System.Linq;
 
 namespace Kalendra.Words.Runtime.Domain
 {
@@ -10,9 +10,17 @@ namespace Kalendra.Words.Runtime.Domain
         readonly List<string> letters;
         readonly IRandomService random = new SystemRandomService();
 
-        public Abecedary(IEnumerable<string> letters) => this.letters = letters.ToList();
+        public Abecedary(IEnumerable<string> letters)
+        {
+            this.letters = new List<string>();
+            foreach(var letter in letters)
+                if(this.letters.Contains(letter))
+                    throw new ArgumentException($"{letter} was repeated");
+                else
+                    this.letters.Add(letter);
+        }
 
-        public bool HasLetter(char letter) => letters.Contains(letter.ToString());
+        public bool HasLetter(char letter) => letters.Contains(letter.ToString(), StringComparer.OrdinalIgnoreCase);
 
         public int GetValueOf(char letter)
         {

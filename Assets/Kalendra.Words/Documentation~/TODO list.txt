@@ -1,13 +1,20 @@
-[ ] Use hashset where useful to infer invariants.
-    [ ] Example: instead of lists in Thesaurus words entries.
+[x] Use hashset where useful to infer invariants.
+    [x] Example: instead of lists in Thesaurus words entries.
+    [x] DISCARDED: HashSet in Abecedary (cause "index" is meaningless in a HashSet).
+[x] Abecedary is not case sensitive.
+[ ] UML invariants.
+[ ] Study cases where non case-sensitive chars might be error-prone.
 
-[ ] GameLexicon, besides alphabet distribution, splits vowels and consonants distribution.
+[ ] Polish API. Example: Thesaurus.HasWord is [Pure]
+
+[-] GameLexicon, besides alphabet distribution, splits vowels and consonants distribution.
 [ ] Alphabet knows what letters are vowels? Or it's implicit by aforesaid splitting?
     [ ] If GameLexicon somehow knows about vowels, distributions are internally made.
 [ ] IsVowel() as an alternative extension method?
 
 [x] DISCARDED: Thesaurus getting some random words from size?
 [x] Thesaurus using uniform ToLower() or ToUpper() conversion as invariant when in/out words.
-[-] Thesaurus GetWordOfSize(int) when param overflows max size.
+[x] DISCARDED: Thesaurus GetWordOfSize(int) when param overflows max size.
+    *API returns null for any size not contained in Thesaurus.
 
 [x] ValuedAlphabet GetRandomLetterByValue().
