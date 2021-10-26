@@ -15,7 +15,7 @@ namespace Kalendra.Words.Tests.Editor
         static string SomeWord => "some word";
         static string AnyOtherWord => "anything";
 
-        static IEnumerable<T2> Repeat<T2>(Func<T2> over, int times) => Interval.From(1, times).IterateOver().Select(_ => over.Invoke());
+        static IEnumerable<T> Repeat<T>(Func<T> over, int times) => Interval.From(1, times).IterateOver().Select(_ => over.Invoke());
         #endregion
         
         #region Has a word
